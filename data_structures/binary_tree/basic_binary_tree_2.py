@@ -1,8 +1,12 @@
-from typing import Optional
-
 """
 Based on: https://www.baeldung.com/java-binary-tree
+
+traverse level order
+Based on: https://www.askpython.com/python/examples/level-order-binary-tree
 """
+
+from typing import Optional
+from queue import Queue
 
 
 class Node:
@@ -60,12 +64,12 @@ class BinaryTree:
             # Node to delete found; code to delete the node will go here
             # Once we find the node to delete, there are 3 main different cases:
             # - a node has no children – this is the simplest case; we just need to replace this node with null in its parent node
-            if current.left == None and current.right == None:
+            if current.left is None and current.right is None:
                 return None
             # - a node has exactly one child – in the parent node, we replace this node with its only child.
-            if current.left == None:
+            if current.left is None:
                 return current.right
-            if current.right == None:
+            if current.right is None:
                 return current.left
             # - a node has two children – this is the most complex case because it requires a tree reorganization
             smallest_value = self.__find_smallest_value(current.right)
@@ -83,7 +87,7 @@ class BinaryTree:
     def __find_smallest_value(self) -> int:
         return (
             self.root.value
-            if self.root.left == None
+            if self.root.left is None
             else self.__find_smallest_value(self.root.left)
         )
 
@@ -129,6 +133,20 @@ class BinaryTree:
             self.traverse_in_order(node.right)
             print(node.value)
 
+    def traverse_level_order(self, root: Optional[Node]):
+        if root is None:
+            return
+
+        Q = Queue()
+        Q.put(root)  # put an item into the queue
+        while not Q.empty():
+            node = Q.get()  # remove and return an item from the queue
+            if node is None:
+                continue
+            print(node.value)
+            Q.put(node.left)
+            Q.put(node.right)
+
 
 def main() -> None:  # Main function for testing.
     bt = BinaryTree(6)
@@ -145,7 +163,17 @@ def main() -> None:  # Main function for testing.
     bt.add(9)
     print(bt.contains_node(9))
 
+    print("traverse_in_order: ")
     bt.traverse_in_order(bt.root)
+
+    print("traverse_pre_order: ")
+    bt.traverse_pre_order(bt.root)
+
+    print("traverse_post_order: ")
+    bt.traverse_post_order(bt.root)
+
+    print("traverse_level_order: ")
+    bt.traverse_level_order(bt.root)
 
 
 if __name__ == "__main__":

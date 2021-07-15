@@ -12,8 +12,8 @@ from queue import Queue
 class Node:
     def __init__(self, value: int) -> None:
         self.value = value
-        self.left: Optional[Node] = None
-        self.right: Optional[Node] = None
+        self.left: Node = None
+        self.right: Node = None
 
 
 class BinaryTree:
@@ -37,7 +37,7 @@ class BinaryTree:
     def add(self, value: int) -> None:
         self.root = self.__add_recursive(self.root, value)
 
-    def __contains_node_recursive(self, current: Optional[Node], value: int) -> bool:
+    def __contains_node_recursive(self, current: Node, value: int) -> bool:
         """
         Here we're searching for the value by comparing it to the value in the
         current node; we'll then continue in the left or right child depending
@@ -56,7 +56,7 @@ class BinaryTree:
     def contains_node(self, value: int) -> bool:
         return self.__contains_node_recursive(self.root, value)
 
-    def __delete_recursive(self, current: Optional[Node], value: int) -> Optional[None]:
+    def __delete_recursive(self, current: Node, value: int) -> Optional[None]:
         if not current:
             return None
 
@@ -94,7 +94,7 @@ class BinaryTree:
     def delete_recursive(self, value: int) -> None:
         self.root = self.__delete_recursive(self.root, value)
 
-    def traverse_in_order(self, node: Optional[Node]) -> None:
+    def traverse_in_order(self, node: Node) -> None:
         """
         Depth-first search is a type of traversal that goes deep as much as
         possible in every child before exploring the next sibling.
@@ -107,7 +107,7 @@ class BinaryTree:
             print(node.value)
             self.traverse_in_order(node.right)
 
-    def traverse_pre_order(self, node: Optional[Node]) -> None:
+    def traverse_pre_order(self, node: Node) -> None:
         """
         Depth-first search is a type of traversal that goes deep as much as
         possible in every child before exploring the next sibling.
@@ -120,7 +120,7 @@ class BinaryTree:
             self.traverse_in_order(node.left)
             self.traverse_in_order(node.right)
 
-    def traverse_post_order(self, node: Optional[Node]) -> None:
+    def traverse_post_order(self, node: Node) -> None:
         """
         Depth-first search is a type of traversal that goes deep as much as
         possible in every child before exploring the next sibling.
@@ -133,7 +133,7 @@ class BinaryTree:
             self.traverse_in_order(node.right)
             print(node.value)
 
-    def traverse_level_order(self, root: Optional[Node]):
+    def traverse_level_order(self, root: Node):
         if root is None:
             return
 

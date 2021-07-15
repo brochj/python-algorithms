@@ -12,7 +12,7 @@ class Node:
         self.data = data
 
 
-def make_set(x: Optional[Node]):
+def make_set(x: Node):
     """
     make x as a set.
     """
@@ -22,7 +22,7 @@ def make_set(x: Optional[Node]):
     x.parent = x
 
 
-def find_set(x: Optional[Node]):
+def find_set(x: Node):
     """
     return the parent of x
     """
@@ -31,7 +31,7 @@ def find_set(x: Optional[Node]):
     return x.parent
 
 
-def union_set(x: Optional[Node], y: Optional[Node]):
+def union_set(x: Node, y: Node):
     """
     union two sets.
     set with bigger rank should be parent, so that the
@@ -63,4 +63,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    print(type((1, 2, 3)))

@@ -27,7 +27,7 @@ class LightBulb(Switchable, Dimmable):
         print("LightBulb: turned off...")
 
     def set_power(self, power: float):
-        print(f"LightBulb: power set to {power}")
+        print(f"LightBulb: power set to {power * 100} %")
 
 
 class Fan(Switchable):
